@@ -1,0 +1,39 @@
+﻿@model MvcSample.Models.Post
+
+@{
+    ViewBag.Title = "New Post";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>New Post</h1>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)
+            @Html.TextBoxFor(model => model.Title, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text)
+            @Html.TextAreaFor(model => model.Text, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category)
+            @Html.TextBoxFor(model => model.Category, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.Category)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" class="btn btn-default" />
+        </p>
+    }
+</div>

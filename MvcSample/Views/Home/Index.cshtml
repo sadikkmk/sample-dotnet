@@ -1,0 +1,69 @@
+﻿@using MvcSample.Models
+@using Nest
+@model MvcSample.Models.SearchResults
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Search Results</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            @if (!string.IsNullOrEmpty(Model.Query))
+            {
+                <h4>Search Query</h4>
+                <ul class="nav nav-pills">
+                    <li><a href="?cat=@Model.Category">@Model.Query <i class="glyphicon glyphicon-remove"></i></a></li>
+                </ul>
+            }
+            <h4>Categories</h4>
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (TermItem item in Model.QueryResponse.Facet<TermFacet>(p => p.Category).Items)
+                {
+                    <li>
+                        @if (item.Term == Model.Category)
+                        {
+                            <a href="?q=@Model.Query">
+                                @Model.Category
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="?cat=@item.Term&q=@Model.Query">
+                                @item.Term
+                                <span class="badge">@item.Count</span>
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <ul class="list-group">
+                @foreach (Post post in Model.QueryResponse.Documents)
+                {
+                    <li class="list-group-item">
+                        <h4>
+                            @post.Title
+                            <a href="?q=@Model.Query&cat=@post.Category"class="label label-default">@post.Category</a>
+                        </h4>
+                        <p>@post.Text</p>
+                        <div class="btn-group">
+                            @Html.ActionLink("Edit", "Edit", "Index", new {id = post.Id}, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Delete", "Delete", "Index", new {id = post.Id}, new { @class = "btn btn-danger" })
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            @if (!Model.QueryResponse.Documents.Any())
+            {
+                <span>Nothing indexed yet, go ahead and @Html.ActionLink("create a new post", "New", "Index").</span>
+            }
+        </div>
+    </div>
+</div>

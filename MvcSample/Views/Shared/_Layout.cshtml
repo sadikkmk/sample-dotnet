@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Facetflow .NET Example</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Search Results", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Create Post", "New", "Index")</li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search" method="GET" action="@Url.Action("Index", "Home")">
+                    <div class="form-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search posts...">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
+            </div>
+        </nav>
+
+        @RenderBody()
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

@@ -19,7 +19,7 @@ When the application starts up, it will attempt to create the index and set up a
 **Indexing**:
 Start off by indexing a new [Post](https://github.com/facetflow/sample-dotnet/blob/master/MvcSample/Models/Post.cs) - this is the document type that we are using for the purpose of this example. You can index a new post by clicking **Create Post** in the top navigation. We will use whatever you put in the *Category* field to create a simple [Terms Facet](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-terms-facet.html) on the search page for you to use to navigate your posts.
 
-**Searching**: You can now search for your posts either my keyword (search box at the top right hand corner), or by faceted navigation from the Category facet (or both).
+**Searching**: You can now search for your posts either by keyword (search box at the top right hand corner), or by faceted navigation from the Category facet (or both).
 
 ## Deploying ###
 The simplest way is to sign up for a [Windows Azure](http://www.windowsazure.com/ "Windows Azure") account and deploy the project to a free Windows Azure Website. 
